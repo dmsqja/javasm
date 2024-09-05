@@ -8,7 +8,7 @@ public class Car {
     private String color;
     private double fuelSize;
     private double currFuel;
-    private double addFuel;
+    private Engine engine;
 
     public Car() {
         Random rand = new Random();
@@ -37,9 +37,17 @@ public class Car {
                 ", color='" + color + '\'' +
                 ", fuelSize=" + fuelSize +
                 ", currFuel=" + currFuel +
+                ", engine=" + engine +
                 '}';
     }
 
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
 
     public void addFuel(double size) throws Exception {
         if(this.currFuel + size > this.fuelSize) {
@@ -57,4 +65,29 @@ public class Car {
     public void brake(){
         System.out.printf("Brake:::: %s \n", this.toString() );
     }
+}
+
+
+class Engine{
+    private int serial;
+    private int size;
+    private String name;
+
+    public Engine() {
+    }
+
+    public Engine(int serial, int size, String name) {
+        this.serial = serial;
+        this.size = size;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Engine{" +
+                "serial=" + serial +
+                ", size=" + size +
+                ", name='" + name + '\'' +
+                '}';
+    }   //개발을 할 당시에 디버깅을 하거나 등에 씌여짐
 }
