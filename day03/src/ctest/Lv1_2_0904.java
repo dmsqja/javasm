@@ -13,7 +13,7 @@ public class Lv1_2_0904 {
         return answer;
     }
     public static void main(String[] args) {
-        int[] arr = {-3, -2, -1, 0, 1, 2, 3};
+        int[] arr = {-2, 3, 0, 2, -5};
         Lv1_2_0904 l = new Lv1_2_0904();
         int result = l.solution(arr);
         System.out.println(result);
