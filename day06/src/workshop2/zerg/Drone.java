@@ -13,4 +13,8 @@ public class Drone extends GroundUnit {
         System.out.println("드론이 변태하기 시작합니다.");
     }
 
+    public void collectResources(int amount) {
+        System.out.println("드론이 자원을 " + amount + "만큼 수집합니다.");
+    }
+
 }
