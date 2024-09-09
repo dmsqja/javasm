@@ -1,51 +1,34 @@
 package workshop2.zerg;
 
 import workshop2.AirUnit;
-import workshop2.Unit;
 
 public class Mutalisk extends AirUnit {
 
-    public Mutalisk(){
+    private boolean acidsprayActive;
+    private long lastAcidSprayTime;
+    private static final long COOLDOWN_TIME = 5000; // 쿨다운 시간 (밀리초 단위, 예: 5000ms = 5초)
+
+    public Mutalisk() {
         super("뮤탈리스크", 120, 9, 0, 4);
-        Zerg.startRegeneration(this);
-    }
-
-
-    public Mutalisk(String name, int maxHp, int damage, int armor, int airSpeed) {
-        super(name, maxHp, damage, armor, airSpeed);
-        Zerg.startRegeneration(this);
-    }
-
-    @Override
-    public void move(int x, int y) {
-        super.move(x, y);
+        acidsprayActive = false;
+        lastAcidSprayTime = System.currentTimeMillis();
     }
 
     @Override
     public void specialAbility() {
-        Zerg.startRegeneration(this);
-    }
-
-    @Override
-    public void attack(Unit target) {
-        super.attack(target);
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-        super.takeDamage(damage);
-        if (!isAlive()) {
-            Zerg.stopRegeneration();  // 유닛이 죽으면 자동 회복 중지
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastAcidSprayTime >= COOLDOWN_TIME) {
+            acidsprayActive = true;
+            lastAcidSprayTime = currentTime; // 쿨다운 시작
+            performAcidSpray(); // 산성 스프레이 발사 메서드
+        } else {
+            System.out.println("산성 스프레이를 사용할 수 없습니다. 쿨다운 중입니다.");
         }
     }
 
-    @Override
-    public void heal(int amount) {
-        super.heal(amount);
-    }
-    @Override
-    public String toString() {
-        String baseInfo = super.toString();
-        return baseInfo;
+    private void performAcidSpray() {
+        // 산성 스프레이를 발사하는 로직
+        System.out.println("산성 스프레이!!");
+        // 이곳에 산성 스프레이의 효과를 구현
     }
 }

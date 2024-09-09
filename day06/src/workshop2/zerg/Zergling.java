@@ -1,51 +1,34 @@
 package workshop2.zerg;
 
 import workshop2.GroundUnit;
-import workshop2.Unit;
 
 public class Zergling extends GroundUnit {
 
+    private boolean bitingActive;
+    private long lastBitingTime;
+    private static final long COOLDOWN_TIME = 3000; // 쿨다운 시간 (밀리초 단위, 예: 3000ms = 3초)
 
-    public Zergling(){
+    public Zergling() {
         super("저글링", 35, 5, 0, 3);
-        Zerg.startRegeneration(this);
-    }
-
-    public Zergling(String name, int maxHp, int damage, int armor, int groundSpeed) {
-        super(name, maxHp, damage, armor, groundSpeed);
-        Zerg.startRegeneration(this);
-    }
-
-    @Override
-    public void move(int x, int y) {
-        super.move(x, y);
+        bitingActive = false;
+        lastBitingTime = System.currentTimeMillis();
     }
 
     @Override
     public void specialAbility() {
-        Zerg.startRegeneration(this);
-    }
-
-    @Override
-    public void attack(Unit target) {
-        super.attack(target);
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-        super.takeDamage(damage);
-        if (!isAlive()) {
-            Zerg.stopRegeneration();  // 유닛이 죽으면 자동 회복 중지
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastBitingTime >= COOLDOWN_TIME) {
+            bitingActive = true;
+            lastBitingTime = currentTime; // 쿨다운 시작
+            performBiting(); // 물어뜯기 능력을 발동하는 메서드
+        } else {
+            System.out.println("물어뜯기를 사용할 수 없습니다. 쿨다운 중입니다.");
         }
     }
 
-    @Override
-    public void heal(int amount) {
-        super.heal(amount);
-    }
-    @Override
-    public String toString() {
-        String baseInfo = super.toString();
-        return baseInfo;
+    private void performBiting() {
+        // 물어뜯기 능력을 발동하는 로직
+        System.out.println("물어뜯기!!");
+        // 이곳에 물어뜯기의 효과를 구현
     }
 }
