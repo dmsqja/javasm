@@ -42,4 +42,9 @@ public class Overload extends AirUnit {
     public void heal(int amount) {
         super.heal(amount);
     }
+    @Override
+    public String toString() {
+        String baseInfo = super.toString();
+        return baseInfo;
+    }
 }

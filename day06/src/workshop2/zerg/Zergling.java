@@ -20,11 +20,6 @@ public class Zergling extends GroundUnit {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    @Override
     public void specialAbility() {
 
     }
@@ -42,5 +37,10 @@ public class Zergling extends GroundUnit {
     @Override
     public void heal(int amount) {
         super.heal(amount);
+    }
+    @Override
+    public String toString() {
+        String baseInfo = super.toString();
+        return baseInfo;
     }
 }
