@@ -16,7 +16,6 @@ public class Lv1_1_0906 {
     }
     public static void main(String[] args) {
         Lv1_1_0906 solution = new Lv1_1_0906();
-        System.out.println();
     }
 
 }
