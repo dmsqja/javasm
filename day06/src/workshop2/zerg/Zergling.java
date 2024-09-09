@@ -8,10 +8,12 @@ public class Zergling extends GroundUnit {
 
     public Zergling(){
         super("저글링", 35, 5, 0, 3);
+        Zerg.startRegeneration(this);
     }
 
     public Zergling(String name, int maxHp, int damage, int armor, int groundSpeed) {
         super(name, maxHp, damage, armor, groundSpeed);
+        Zerg.startRegeneration(this);
     }
 
     @Override
@@ -21,7 +23,7 @@ public class Zergling extends GroundUnit {
 
     @Override
     public void specialAbility() {
-
+        Zerg.startRegeneration(this);
     }
 
     @Override
@@ -32,6 +34,9 @@ public class Zergling extends GroundUnit {
     @Override
     public void takeDamage(int damage) {
         super.takeDamage(damage);
+        if (!isAlive()) {
+            Zerg.stopRegeneration();  // 유닛이 죽으면 자동 회복 중지
+        }
     }
 
     @Override
