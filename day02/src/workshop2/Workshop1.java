@@ -1,4 +1,4 @@
-package workshop;
+package workshop2;
 
 import java.util.Random;
 
