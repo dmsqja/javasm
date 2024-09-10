@@ -6,7 +6,6 @@ import frame.Db;
 import repository.CustDb;
 import repository.ItemDb;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class Main {
