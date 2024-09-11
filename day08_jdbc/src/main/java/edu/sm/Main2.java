@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Main {
+public class Main2 {
     public static void main(String[] args) {
         // 1. MySQL JDBC Driver Loading
         try {
@@ -24,23 +24,23 @@ public class Main {
         try {
             conn = DriverManager.getConnection(url, sqlid, sqlpwd);
             System.out.println("Connection to database");
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             System.out.println("Connection error");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
         // 3. SQL
-        String insertsql = "INSERT INTO cust VALUES(?,?,?)";
+        String deleteSql = "DELETE FROM cust WHERE id = ?";
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement(insertsql);
-            ps.setString(1, "id05");
-            ps.setString(2, "pwd05");
-            ps.setString(3, "최은범");
+            ps = conn.prepareStatement(deleteSql);
+            ps.setString(1, "id03");
+
             int result = ps.executeUpdate();
             System.out.println(result);
-            System.out.println("Inserted rows into database");
+            System.out.println("Deleted rows into database");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -59,8 +59,5 @@ public class Main {
                 }
             }
         }
-
-        // 4. Close
-
     }
 }

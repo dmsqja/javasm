@@ -1,11 +1,8 @@
 package edu.sm;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class Main {
+public class Main4 {
     public static void main(String[] args) {
         // 1. MySQL JDBC Driver Loading
         try {
@@ -31,27 +28,36 @@ public class Main {
         }
 
         // 3. SQL
-        String insertsql = "INSERT INTO cust VALUES(?,?,?)";
+        String selectOneSql = "SELECT * FROM cust WHERE id = ?";
         PreparedStatement ps = null;
+        ResultSet rs = null;
+
         try {
-            ps = conn.prepareStatement(insertsql);
-            ps.setString(1, "id05");
-            ps.setString(2, "pwd05");
-            ps.setString(3, "최은범");
-            int result = ps.executeUpdate();
-            System.out.println(result);
-            System.out.println("Inserted rows into database");
-        } catch (SQLException e) {
+            ps = conn.prepareStatement(selectOneSql);
+            ps.setString(1, "id01");
+            rs = ps.executeQuery();
+            rs.next();
+            System.out.println(rs.getString("id"));
+            System.out.println(rs.getString("pwd"));
+            System.out.println(rs.getString("name"));
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(ps != null) {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (ps != null) {
                 try {
                     ps.close();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
-            if(conn != null) {
+            if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException e) {
@@ -59,8 +65,5 @@ public class Main {
                 }
             }
         }
-
-        // 4. Close
-
     }
 }

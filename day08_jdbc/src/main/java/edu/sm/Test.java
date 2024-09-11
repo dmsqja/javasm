@@ -1,11 +1,13 @@
 package edu.sm;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
+import javax.naming.CommunicationException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Main {
+public class Test {
     public static void main(String[] args) {
         // 1. MySQL JDBC Driver Loading
         try {
@@ -24,43 +26,37 @@ public class Main {
         try {
             conn = DriverManager.getConnection(url, sqlid, sqlpwd);
             System.out.println("Connection to database");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (CommunicationsException e){
+            System.out.println("Coummunications Exception");
+            System.out.println(e.getMessage());
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+            try {
+                conn = DriverManager.getConnection(url, sqlid, sqlpwd);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         } catch (SQLException e) {
             System.out.println("Connection error");
             System.out.println(e.getMessage());
             e.printStackTrace();
-        }
-
-        // 3. SQL
-        String insertsql = "INSERT INTO cust VALUES(?,?,?)";
-        PreparedStatement ps = null;
-        try {
-            ps = conn.prepareStatement(insertsql);
-            ps.setString(1, "id05");
-            ps.setString(2, "pwd05");
-            ps.setString(3, "최은범");
-            int result = ps.executeUpdate();
-            System.out.println(result);
-            System.out.println("Inserted rows into database");
-        } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
-            if(ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
             if(conn != null) {
                 try {
                     conn.close();
+                    System.out.println("Connection closed");
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
-
-        // 4. Close
-
     }
 }
