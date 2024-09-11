@@ -11,7 +11,7 @@ public class CustDb implements Db<String, Cust> {
     @Override
     public void insert(Cust cust) throws Exception{
         System.out.println("Inserted: " + cust.getName());
-
+1`
     }
 
     @Override
