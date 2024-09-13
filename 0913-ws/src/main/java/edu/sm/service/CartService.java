@@ -1,8 +1,7 @@
 package edu.sm.service;
 
-import edu.sm.dao.CustDao;
-import edu.sm.dto.Cust;
-import edu.sm.exception.NotFoundException;
+import edu.sm.dao.CartDao;
+import edu.sm.dto.Cart;
 import edu.sm.frame.ConnectionPool;
 import edu.sm.frame.MService;
 
@@ -10,13 +9,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CustService implements MService<String, Cust> {
+public class CartService implements MService<Integer, Cart> {
 
-    CustDao dao;
+    CartDao dao;
     ConnectionPool cp;
 
-    public CustService() {
-        dao = new CustDao();
+    public CartService() {
+        dao = new CartDao();
         try {
             cp = ConnectionPool.create();
         } catch (SQLException e) {
@@ -25,46 +24,43 @@ public class CustService implements MService<String, Cust> {
     }
 
     @Override
-    public Cust add(Cust cust) throws Exception {
+    public Cart add(Cart item) throws Exception {
         Connection con = cp.getConnection();
         try {
             con.setAutoCommit(false);
-            dao.insert(cust, con);
-            System.out.println("Send SMS to:" + cust.getId());
+            item = dao.insert(item, con);
+            System.out.println("장바구니에 상품 추가: " + item.getProductId());
             con.commit();
-        }catch(Exception e) {
+        } catch(Exception e) {
             con.rollback();
             throw e;
-        }finally {
+        } finally {
             cp.releaseConnection(con);
         }
-        return cust;
+        return item;
     }
 
     @Override
-    public Cust modify(Cust cust) throws Exception {
+    public Cart modify(Cart cart) throws Exception {
         Connection con = cp.getConnection();
         try {
-            dao.update(cust, con);
-            System.out.println("Send SMS to:" + cust.getId());
-        }catch(Exception e) {
+            cart = dao.update(cart, con);
+            System.out.println("장바구니 아이템 수정: " + cart.getId());
+        } catch(Exception e) {
             throw e;
-        }finally {
+        } finally {
             cp.releaseConnection(con);
         }
-        return cust;
+        return cart;
     }
 
     @Override
-    public Boolean remove(String s) throws Exception {
+    public Boolean remove(Integer id) throws Exception {
         Connection con = cp.getConnection();
         Boolean result = false;
         try {
-            result = dao.delete(s, con);
-            if (!result) {
-                throw new NotFoundException("해당 ID를 가진 고객이 존재하지 않습니다: " + s);
-            }
-            System.out.println("Send SMS to:" + s);
+            result = dao.delete(id, con);
+            System.out.println("장바구니 아이템 삭제: " + id);
         } catch(Exception e) {
             throw e;
         } finally {
@@ -73,30 +69,29 @@ public class CustService implements MService<String, Cust> {
         return result;
     }
 
-
     @Override
-    public Cust get(String s) throws Exception {
+    public Cart get(Integer id) throws Exception {
         Connection con = cp.getConnection();
-        Cust result = null;
+        Cart result = null;
         try {
-            result = dao.select(s, con);
-        }catch(Exception e) {
+            result = dao.select(id, con);
+        } catch(Exception e) {
             throw e;
-        }finally {
+        } finally {
             cp.releaseConnection(con);
         }
         return result;
     }
 
     @Override
-    public List<Cust> get() throws Exception {
+    public List<Cart> get() throws Exception {
         Connection con = cp.getConnection();
-        List<Cust> result = null;
+        List<Cart> result = null;
         try {
             result = dao.select(con);
-        }catch(Exception e) {
+        } catch(Exception e) {
             throw e;
-        }finally {
+        } finally {
             cp.releaseConnection(con);
         }
         return result;

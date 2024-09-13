@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Cust {
-    private String id;
-    private String pwd;
-    private String name;
+public class Cart {
+    private int id;
+    private String custId;
+    private int productId;
+    private int quantity;
 }

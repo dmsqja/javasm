@@ -1,5 +1,6 @@
 package edu.sm.frame;
 
+
 import java.util.List;
 
 public interface MService<K,V> {
