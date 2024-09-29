@@ -6,11 +6,10 @@ public class Lv2_2_0923 {
     }
     public int[] solution(int brown, int yellow) {
 
-        int[] answer = new int[2];  // 정답 배열
+        int[] answer = new int[2];
 
-        int area = brown + yellow; // 전체 공간
+        int area = brown + yellow;
 
-        // 가로 세로 공간은 최소 3칸이상
         int start = 3;
         int end = area/3;
 
