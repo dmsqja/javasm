@@ -1,3 +1,5 @@
+package ctest_1008;
+
 public class Lv2_1_1008 {
     public static void main(String[] args) {
         int[][] arr1 = {{1,4},{3,2},{4,1}};

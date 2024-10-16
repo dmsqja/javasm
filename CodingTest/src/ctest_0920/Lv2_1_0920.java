@@ -1,3 +1,5 @@
+package ctest_0920;
+
 public class Lv2_1_0920 {
     public static void main(String[] args) {
         System.out.println(solution("3people unFollowed me"	));

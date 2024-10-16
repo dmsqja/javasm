@@ -1,3 +1,5 @@
+package ctest_0919;
+
 import java.util.Scanner;
 
 public class Lv1_3_0919 {

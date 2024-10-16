@@ -1,3 +1,5 @@
+package ctest_0923;
+
 public class Lv2_2_0923 {
     public static void main(String[] args) {
         System.out.println(new int[]{10,2});

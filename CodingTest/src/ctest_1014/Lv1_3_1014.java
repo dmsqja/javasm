@@ -1,3 +1,5 @@
+package ctest_1014;
+
 import java.util.*;
 public class Lv1_3_1014 {
     public static void main(String[] args) {

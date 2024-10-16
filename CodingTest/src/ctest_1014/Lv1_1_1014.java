@@ -1,3 +1,5 @@
+package ctest_1014;
+
 public class Lv1_1_1014 {
     public int solution(int seat, String[][] passengers) {
         int num_passenger = 0;

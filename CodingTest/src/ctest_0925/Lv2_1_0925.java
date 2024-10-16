@@ -1,3 +1,5 @@
+package ctest_0925;
+
 import java.util.*;
 
 public class Lv2_1_0925 {

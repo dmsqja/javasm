@@ -1,3 +1,5 @@
+package ctest_0919;
+
 public class Lv1_2_0919 {
     public static void main(String[] args) {
         System.out.println(solution("01033334444"));

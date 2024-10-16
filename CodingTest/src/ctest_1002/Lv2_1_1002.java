@@ -1,3 +1,5 @@
+package ctest_1002;
+
 public class Lv2_1_1002 {
     public static void main(String[] args) {
         System.out.println(solution(1));

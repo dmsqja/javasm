@@ -1,4 +1,4 @@
-import java.util.*;
+package ctest_1008;
 
 public class Lv1_1_1008 {
     public static void main(String[] args) {
